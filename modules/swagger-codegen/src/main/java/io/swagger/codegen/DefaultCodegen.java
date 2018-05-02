@@ -3300,6 +3300,7 @@ public class DefaultCodegen {
         }
 
         // Remove all underscores (underscore_case to camelCase)
+        /*
         p = Pattern.compile("(_)(.)");
         m = p.matcher(word);
         while (m.find()) {
@@ -3312,6 +3313,7 @@ public class DefaultCodegen {
             }
             m = p.matcher(word);
         }
+        */
 
         // Remove all hyphens (hyphen-case to camelCase)
         p = Pattern.compile("(-)(.)");
