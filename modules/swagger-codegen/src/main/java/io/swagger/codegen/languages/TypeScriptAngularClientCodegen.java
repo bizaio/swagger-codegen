@@ -31,6 +31,11 @@ public class TypeScriptAngularClientCodegen extends AbstractTypeScriptClientCode
     public static final String TAGGED_UNIONS ="taggedUnions";
     public static final String NG_VERSION = "ngVersion";
     public static final String PROVIDED_IN_ROOT ="providedInRoot";
+    public static final String GIT_REPOSITORY = "gitRepository";
+	public static final String NPM_AUTHOR = "npmAuthor";
+	public static final String NPM_AUTHOR_DEFAULT_VALUE = "Swagger Codegen Contributors";
+	public static final String NPM_LICENSE = "npmLicense";
+	public static final String NPM_LICENSE_DEFAULT_VALUE = "Unlicense";
 
     protected String npmName = null;
     protected String npmVersion = "1.0.0";
@@ -68,6 +73,9 @@ public class TypeScriptAngularClientCodegen extends AbstractTypeScriptClientCode
             "Use this property to provide Injectables in root (it is only valid in angular version greater or equal to 6.0.0).",
             BooleanProperty.TYPE).defaultValue(Boolean.FALSE.toString()));
         this.cliOptions.add(new CliOption(NG_VERSION, "The version of Angular. Default is '4.3'"));
+        this.cliOptions.add(new CliOption(GIT_REPOSITORY, "The Git Repository this Client is committed to"));
+        this.cliOptions.add(new CliOption(NPM_AUTHOR, "Specify the author to use in package.json"));
+        this.cliOptions.add(new CliOption(NPM_LICENSE, "Specify the package.json license name"));
     }
 
     @Override
@@ -136,6 +144,10 @@ public class TypeScriptAngularClientCodegen extends AbstractTypeScriptClientCode
         additionalProperties.put("injectionTokenTyped", ngVersion.atLeast("4.0.0"));
         additionalProperties.put("useHttpClient", ngVersion.atLeast("4.3.0"));
         additionalProperties.put("useRxJS6", ngVersion.atLeast("6.0.0"));
+        additionalProperties.put("hasRepository", additionalProperties.get(GIT_REPOSITORY) != null);
+        additionalProperties.put("gitRepository", additionalProperties.get(GIT_REPOSITORY));
+        additionalProperties.put(NPM_AUTHOR, additionalProperties.getOrDefault(NPM_AUTHOR, NPM_AUTHOR_DEFAULT_VALUE));
+        additionalProperties.put(NPM_LICENSE, additionalProperties.getOrDefault(NPM_LICENSE, NPM_LICENSE_DEFAULT_VALUE));
         if (!ngVersion.atLeast("4.3.0")) {
             supportingFiles.add(new SupportingFile("rxjs-operators.mustache", getIndexDirectory(), "rxjs-operators.ts"));
         }
@@ -176,6 +188,7 @@ public class TypeScriptAngularClientCodegen extends AbstractTypeScriptClientCode
         additionalProperties.put("useOldNgPackagr", !ngVersion.atLeast("5.0.0"));
 
         additionalProperties.put("supportedNgVersion", ngVersion.atLeast("6.0.0"));
+        additionalProperties.put("supportedNg8Version", ngVersion.atLeast("8.0.0"));
 
         //Files for building our lib
         supportingFiles.add(new SupportingFile("package.mustache", getIndexDirectory(), "package.json"));

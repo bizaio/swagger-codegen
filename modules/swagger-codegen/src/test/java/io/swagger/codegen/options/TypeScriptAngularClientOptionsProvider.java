@@ -39,6 +39,9 @@ public class TypeScriptAngularClientOptionsProvider implements OptionsProvider {
                 .put(TypeScriptAngularClientCodegen.TAGGED_UNIONS, Boolean.FALSE.toString())
                 .put(TypeScriptAngularClientCodegen.NPM_REPOSITORY, NPM_REPOSITORY)
                 .put(TypeScriptAngularClientCodegen.NG_VERSION, NG_VERSION)
+                .put(TypeScriptAngularClientCodegen.GIT_REPOSITORY, "")
+                .put(TypeScriptAngularClientCodegen.NPM_AUTHOR, TypeScriptAngularClientCodegen.NPM_AUTHOR_DEFAULT_VALUE)
+                .put(TypeScriptAngularClientCodegen.NPM_LICENSE, TypeScriptAngularClientCodegen.NPM_LICENSE_DEFAULT_VALUE)
                 .put(CodegenConstants.ALLOW_UNICODE_IDENTIFIERS, ALLOW_UNICODE_IDENTIFIERS_VALUE)
                 .build();
     }
